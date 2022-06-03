@@ -1,0 +1,5 @@
+server\ServerService.class
+common\Settings.class
+common\ServerContract.class
+server\Server.class
+common\ClientContract.class

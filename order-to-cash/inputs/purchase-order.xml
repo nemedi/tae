@@ -1,0 +1,8 @@
+<purchaseOrder id="bcea1c69-c1cb-4414-b875-8fd4ebfe381a">
+	<buyer name="Axway"/>
+	<supplier name="IBM"/>
+	<orderItems currency="USD">
+		<orderItem product="ILOG Diagrammer" quantity="1" unitPrice="30000"/>
+		<orderItem product="ILOG Charter" quantity="1" unitPrice="20000"/>
+	</orderItems>
+</purchaseOrder>
