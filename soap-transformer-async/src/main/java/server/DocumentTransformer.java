@@ -11,7 +11,7 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
-import com.sun.org.apache.xml.internal.serializer.OutputPropertiesFactory;
+//import com.sun.org.apache.xml.internal.serializer.OutputPropertiesFactory;
 
 public class DocumentTransformer {
 
@@ -22,7 +22,7 @@ public class DocumentTransformer {
 					.newInstance()
 					.newTransformer(new StreamSource(new File(xsl)));
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-			transformer.setOutputProperty(OutputPropertiesFactory.S_KEY_INDENT_AMOUNT, "2");
+			//transformer.setOutputProperty(OutputPropertiesFactory.S_KEY_INDENT_AMOUNT, "2");
 			transformer.transform(new StreamSource(
 						new ByteArrayInputStream(data)),
 					new StreamResult(stream));

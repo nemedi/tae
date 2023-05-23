@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>demo</groupId>
-	<artifactId>order-to-cash</artifactId>
+	<artifactId>order-to-cache-kafka</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>order-to-cache</name>
-	<description>Order to Cash Flow</description>
+	<name>order-to-cache-kafka</name>
+	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
