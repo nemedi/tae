@@ -1,4 +1,4 @@
-package order2cache.logistics;
+package order2cash.logistics;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

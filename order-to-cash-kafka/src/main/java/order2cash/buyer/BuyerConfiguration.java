@@ -1,4 +1,4 @@
-package order2cache.bank;
+package order2cash.buyer;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,7 +18,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
 
 @Configuration
-public class BankConfiguration {
+public class BuyerConfiguration {
 	
 	@Value("${kafka.producer.bootstrap}")
 	private String producerBootstrap;

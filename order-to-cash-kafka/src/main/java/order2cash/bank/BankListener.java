@@ -1,4 +1,4 @@
-package order2cache.buyer;
+package order2cash.bank;
 
 import java.util.Optional;
 
@@ -13,16 +13,15 @@ import org.springframework.stereotype.Service;
 import order2cache.Topics;
 
 @Service
-public class BuyerListener {
+public class BankListener {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(BuyerListener.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(BankListener.class);
 	
 	@Autowired
-	private BuyerDispatcher dispatcher;
+	private BankDispatcher dispatcher;
 	
 	@SuppressWarnings("incomplete-switch")
-	@KafkaListener(topics = "#{'${kafka.consumer.topics}'.split(',')}",
-		groupId = "#{'${kafka.consumer.group}'}")
+	@KafkaListener(topics = "#{'${kafka.consumer.topics}'.split(',')}")
 	public void onReceiving(String data,
 			@Header(KafkaHeaders.RECEIVED_TOPIC) String topic,
 			@Header(KafkaHeaders.RECEIVED_PARTITION_ID) int partition,
@@ -35,13 +34,11 @@ public class BuyerListener {
 		Optional<Topics> topicItem = Topics.findTopicByName(topic);
 		if (topicItem.isPresent()) {
 			switch (topicItem.get()) {
-			case PURCHASE_ORDER_ACKNOWLEDGEMENT:
-				break;
-			case INVOICE:
-				break;
-			case SHIPMENT_NOTICE:
+			case SHIPMENT_INFORMATION:
 				break;
 			case SHIPMENT_SCHEDULE:
+				break;
+			case PAYMENT_ADVICE:
 				break;
 			}
 		}

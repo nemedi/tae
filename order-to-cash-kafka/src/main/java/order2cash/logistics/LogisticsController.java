@@ -1,8 +1,8 @@
-package order2cache.supplier;
+package order2cash.logistics;
 
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class SupplierController {
+public class LogisticsController {
 	
 }

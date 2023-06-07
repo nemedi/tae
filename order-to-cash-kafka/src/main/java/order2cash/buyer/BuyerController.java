@@ -1,4 +1,4 @@
-package order2cache.buyer;
+package order2cash.buyer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
