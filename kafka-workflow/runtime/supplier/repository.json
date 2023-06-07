@@ -1,0 +1,24 @@
+{
+	"products" : [
+		{
+			"id" : "3d21bbe9-4f4a-4a30-b125-d1a79590d294",
+			"name" : "Laptop Apple MacBook Pro 14-inch cu procesor Apple M2 Pro",
+			"price": 10500
+		},
+		{
+			"id" : "0eb9a3da-6f08-4e9f-acd0-72c5c4d927c5",
+			"name" : "Laptop Apple MacBook Air 13-inch, True Tone, procesor Apple M1",
+			 "price": 4800
+		},
+		{
+			"id" : "898040b9-a3eb-4350-a5d9-fdd46b2666cf",
+			"name" : "Laptop Apple MacBook Air 13-inch, cu procesor Apple M2",
+			 "price": 6000
+		},
+		{
+			"id" : "72d7dd7b-0726-4e26-b403-06f8d36181eb",
+			"name" : "Laptop Apple MacBook Pro 16-inch cu procesor Apple M2 Max",
+			"price": 18500
+		}						
+	]
+}
