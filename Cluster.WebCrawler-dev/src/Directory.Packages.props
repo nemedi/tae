@@ -1,0 +1,42 @@
+<Project>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+  <!-- App dependencies -->
+  <ItemGroup>
+    <PackageVersion Include="Akka" Version="$(AkkaVersion)" />
+    <PackageVersion Include="Akka.Cluster" Version="$(AkkaVersion)" />
+    <PackageVersion Include="Akka.DependencyInjection" Version="$(AkkaVersion)" />
+    <PackageVersion Include="Akka.Discovery.Azure" Version="1.5.37" />
+    <PackageVersion Include="Akka.HealthCheck.Cluster" Version="$(AkkaHealthCheckVersion)" />
+    <PackageVersion Include="Akka.HealthCheck.Hosting.Web" Version="$(AkkaHealthCheckVersion)" />
+    <PackageVersion Include="Akka.Streams" Version="$(AkkaVersion)" />
+    <PackageVersion Include="Akka.Cluster.Hosting" Version="$(AkkaHostingVersion)" />
+    <PackageVersion Include="Akka.Discovery.KubernetesApi" Version="$(AkkaManagementVersion)" />
+    <PackageVersion Include="Akka.HealthCheck.Hosting" Version="$(AkkaHealthCheckVersion)" />
+    <PackageVersion Include="Akka.Management" Version="$(AkkaManagementVersion)" />
+    <PackageVersion Include="Petabridge.Cmd.Cluster" Version="$(PetabridgeCmdVersion)" />
+    <PackageVersion Include="HtmlAgilityPack" Version="1.11.54" />
+    <PackageVersion Include="Microsoft.Extensions.Hosting" Version="$(MicrosoftExtensionsVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.Logging" Version="$(MicrosoftExtensionsVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Configuration" Version="$(MicrosoftExtensionsVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Console" Version="$(MicrosoftExtensionsVersion)" />
+  </ItemGroup>
+  <!-- Test dependencies -->
+  <ItemGroup>
+    <PackageVersion Include="FluentAssertions" Version="6.12.0" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
+    <PackageVersion Include="xunit" Version="$(XunitVersion)" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="3.0.0" />
+    <PackageVersion Include="Akka.TestKit.Xunit2" Version="$(AkkaVersion)" />
+  </ItemGroup>
+  <!-- Aspire dependencies -->
+  <ItemGroup>
+    <PackageVersion Include="Aspire.Hosting.AppHost" Version="$(AspireVersion)" />
+    <PackageVersion Include="Aspire.Hosting.Azure.Storage" Version="$(AspireVersion)" />
+  </ItemGroup>
+  <!-- SourceLink support for all Akka.NET projects -->
+  <ItemGroup>
+    <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="8.0.0" />
+  </ItemGroup>
+</Project>

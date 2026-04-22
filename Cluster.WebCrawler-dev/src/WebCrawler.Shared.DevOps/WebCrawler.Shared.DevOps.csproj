@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>$(NetCoreVersion)</TargetFramework>
+    <Description>Common DevOps configuration and instrumentation for WebCrawler.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Akka.Cluster.Hosting" />
+    <PackageReference Include="Akka.Discovery.Azure" />
+    <PackageReference Include="Akka.Discovery.KubernetesApi" />
+    <PackageReference Include="Akka.HealthCheck.Hosting" />
+    <PackageReference Include="Akka.Management" />
+    <PackageReference Include="Petabridge.Cmd.Cluster" />
+    <PackageReference Include="Microsoft.Extensions.Hosting"/>
+  </ItemGroup>
+
+</Project>

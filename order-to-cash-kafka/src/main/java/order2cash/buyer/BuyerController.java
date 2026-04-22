@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import order2cache.Topics;
+import order2cash.Topics;
 
 @RestController
 public class BuyerController {

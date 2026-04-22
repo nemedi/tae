@@ -1,0 +1,73 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: crawler
+  labels:
+    app: crawler
+spec:
+  publishNotReadyAddresses: true
+  clusterIP: None
+  ports:
+    - port: 8558
+      name: management
+    - port: 5055
+      name: akka-remote
+  selector:
+    app: crawler
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: crawler
+  labels:
+    app: crawler
+    cluster: webcrawler
+spec:
+  serviceName: crawler
+  replicas: 3
+  selector:
+    matchLabels:
+      app: crawler
+  template:
+    metadata:
+      labels:
+        app: crawler
+        cluster: webcrawler
+    spec:
+      terminationGracePeriodSeconds: 35
+      containers:
+      - name: crawler
+        image: webcrawler.crawlservice:0.3.0
+        lifecycle:
+          preStop:
+            exec:
+              command: ["/bin/sh", "-c", "pbm 127.0.0.1:9110 cluster leave"]
+        env:
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: CLUSTER__IP
+          value: "$(POD_NAME).crawler"
+        - name: CLUSTER__PORT
+          value: "5055"
+        - name: CLUSTER__STARTUPMETHOD
+          value: "KubernetesDiscovery"
+        - name: CLUSTER__DISCOVERY__SERVICENAME
+          value: "webcrawler"
+        - name: CLUSTER__READINESSPORT
+          value: "11001"
+        - name: CLUSTER__PBMPORT
+          value: "9110"
+        - name: CLUSTER__ISDOCKER
+          value: "true"
+        livenessProbe:
+          tcpSocket:
+            port: 11001
+        ports:
+          - containerPort: 8558
+            protocol: TCP
+            name: management
+          - containerPort: 5055
+            protocol: TCP
+            name: akka-remote

@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>$(NetCoreVersion)</TargetFramework>
+    <EnableSdkContainerSupport>true</EnableSdkContainerSupport>
+    <ContainerRepository>webcrawler.web</ContainerRepository>
+    <ContainerTitle>web</ContainerTitle>
+    <ContainerPort>80</ContainerPort>
+    <ContainerPort>8558</ContainerPort>
+    <ContainerPort>5055</ContainerPort>
+    <ContainerPort>11001</ContainerPort>
+    <ContainerPort>9110</ContainerPort>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="web.hocon">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Akka.Cluster" />
+    <PackageReference Include="Akka.DependencyInjection" />
+    <PackageReference Include="Akka.HealthCheck.Cluster" />
+    <PackageReference Include="Akka.HealthCheck.Hosting.Web" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WebCrawler.Shared.DevOps\WebCrawler.Shared.DevOps.csproj" />
+    <ProjectReference Include="..\WebCrawler.Shared\WebCrawler.Shared.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="wwwroot\lib\knockoutjs\" />
+  </ItemGroup>
+</Project>
