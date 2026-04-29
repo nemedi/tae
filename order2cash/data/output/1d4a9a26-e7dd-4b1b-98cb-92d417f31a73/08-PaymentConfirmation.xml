@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><PaymentConfirmation>
+    <ConfirmationId>PAYCONF-7EB0D438</ConfirmationId>
+    <InstructionReference>PAYINST-00314764</InstructionReference>
+    <InvoiceReference>INV-C32E53C3</InvoiceReference>
+    <OrderReference>PO-DEMO-001</OrderReference>
+    <TransactionId>TXN-DCEB8C50</TransactionId>
+    <ConfirmationDate>2026-04-29</ConfirmationDate>
+    <Status>COMPLETED</Status>
+    <ConfirmedAmount>7150.00</ConfirmedAmount>
+    <Currency>USD</Currency>
+    <PaymentReference>PAY-REF-PO-DEMO-001</PaymentReference>
+    <PaidBy>
+        <BuyerId>BUYER-001</BuyerId>
+    </PaidBy>
+    <PaidTo>
+        <SupplierId>SUPP-001</SupplierId>
+        <TransactionReference>TXN-DCEB8C50</TransactionReference>
+    </PaidTo>
+</PaymentConfirmation>

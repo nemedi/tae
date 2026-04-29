@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?><InventoryRequest>
+    <RequestId>INVREQ-C49FB234</RequestId>
+    <OrderReference>PO-DEMO-001</OrderReference>
+    <SupplierId>SUPP-001</SupplierId>
+    <BuyerId>BUYER-001</BuyerId>
+    <RequestDate>2026-04-29</RequestDate>
+    <PaymentTerms>NET30</PaymentTerms>
+    <Currency>USD</Currency>
+    <DeliveryAddress>
+            
+        <Street>123 Commerce Avenue</Street>
+            
+        <City>New York</City>
+            
+        <PostalCode>10001</PostalCode>
+            
+        <Country>USA</Country>
+          
+    </DeliveryAddress>
+    <RequestItems>
+        <RequestItem>
+            <LineNumber>1</LineNumber>
+            <ProductCode>WIDGET-A</ProductCode>
+            <Description>Premium Widget Type A</Description>
+            <RequiredQuantity>100</RequiredQuantity>
+            <UnitPrice>25.00</UnitPrice>
+            <LineTotal>2500.00</LineTotal>
+        </RequestItem>
+        <RequestItem>
+            <LineNumber>2</LineNumber>
+            <ProductCode>GADGET-B</ProductCode>
+            <Description>Electronic Gadget Type B</Description>
+            <RequiredQuantity>50</RequiredQuantity>
+            <UnitPrice>80.00</UnitPrice>
+            <LineTotal>4000.00</LineTotal>
+        </RequestItem>
+    </RequestItems>
+</InventoryRequest>

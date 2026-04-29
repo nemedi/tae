@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><PaymentInstruction>
+    <InstructionId>PAYINST-00314764</InstructionId>
+    <InvoiceReference>INV-C32E53C3</InvoiceReference>
+    <OrderReference>PO-DEMO-001</OrderReference>
+    <InstructionDate>2026-04-29</InstructionDate>
+    <PaymentDueDate>2026-05-29</PaymentDueDate>
+    <Currency>USD</Currency>
+    <PaymentMethod>BANK_TRANSFER</PaymentMethod>
+    <PaymentReference>PAY-REF-PO-DEMO-001</PaymentReference>
+    <PayFrom>
+        <BuyerId>BUYER-001</BuyerId>
+        <BankAccount>IBAN-GB-BUYER001-87654321</BankAccount>
+        <BankName>Buyer Commerce Bank</BankName>
+    </PayFrom>
+    <PayTo>
+        <SupplierId>SUPP-001</SupplierId>
+        <BankAccount>IBAN-GB-SUPP001-12345678</BankAccount>
+        <BankName>Global Trade Bank PLC</BankName>
+        <BankBIC>GTBKGB21XXX</BankBIC>
+    </PayTo>
+    <Amount>7150.00</Amount>
+</PaymentInstruction>

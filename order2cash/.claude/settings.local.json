@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p data/input data/output)",
+      "Bash(mv data/PurchaseOrder.xml data/input/PurchaseOrder.xml)",
+      "Bash(touch data/output/.gitkeep)"
+    ]
+  }
+}
