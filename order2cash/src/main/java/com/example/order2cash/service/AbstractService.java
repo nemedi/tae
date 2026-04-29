@@ -13,15 +13,12 @@ import com.example.order2cash.util.XsltTransformer;
 
 public abstract class AbstractService {
 
-	protected static Logger log;
+	protected static final Logger log = LoggerFactory.getLogger(AbstractService.class);
     protected final KafkaTemplate<String, String> kafka;
     protected final XsltTransformer xslt;
     protected final XmlOutputWriter writer;
     
     public AbstractService(KafkaTemplate<String, String> kafka, XsltTransformer xslt, XmlOutputWriter writer) {
-    	if (log == null) {
-    		log = LoggerFactory.getLogger(getClass());
-    	}
         this.kafka = kafka;
         this.xslt = xslt;
         this.writer = writer;
