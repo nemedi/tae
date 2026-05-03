@@ -1,7 +1,5 @@
 # README.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
-
 ## Build and Run
 
 ```bash
@@ -89,9 +87,3 @@ BUYER + SUPPLIER ─────────────────────
 | `payment-instructions` | Buyer | Bank |
 | `payment-confirmations` | Bank | Buyer, Supplier |
 
-## Docker / Kafka Notes
-
-- `docker-compose.yml` uses Confluent images (`cp-zookeeper:7.6.0`, `cp-kafka:7.6.0`).
-- Kafka listens internally on `kafka:29092` (used by the Spring app) and externally on `localhost:9092`.
-- The app container depends on the `service_healthy` condition of Kafka; `BuyerService` also waits 12 s before sending the first message to allow topic creation to complete.
-- `KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'false'` — topics are created by `KafkaConfig` beans.
