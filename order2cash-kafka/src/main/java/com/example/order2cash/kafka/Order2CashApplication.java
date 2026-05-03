@@ -1,4 +1,4 @@
-package com.example.order2cash;
+package com.example.order2cash.kafka;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

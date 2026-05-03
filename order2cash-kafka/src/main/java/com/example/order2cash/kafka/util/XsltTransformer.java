@@ -1,4 +1,4 @@
-package com.example.order2cash.util;
+package com.example.order2cash.kafka.util;
 
 import org.springframework.stereotype.Component;
 
@@ -14,6 +14,8 @@ import java.util.Map;
 public class XsltTransformer {
 
     private final TransformerFactory factory = TransformerFactory.newInstance();
+    
+    private XsltTransformer() {}
 
     public String transform(String inputXml, String xsltClasspathResource, Map<String, String> params) {
         try {

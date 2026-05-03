@@ -1,4 +1,4 @@
-package com.example.order2cash.service;
+package com.example.order2cash.kafka.service;
 
 import java.nio.charset.StandardCharsets;
 import java.util.UUID;
@@ -8,8 +8,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 
-import com.example.order2cash.util.XmlOutputWriter;
-import com.example.order2cash.util.XsltTransformer;
+import com.example.order2cash.kafka.util.XmlOutputWriter;
+import com.example.order2cash.kafka.util.XsltTransformer;
 
 public abstract class AbstractService {
 

@@ -1,4 +1,4 @@
-package com.example.order2cash.config;
+package com.example.order2cash.kafka.config;
 
 public final class KafkaTopics {
 

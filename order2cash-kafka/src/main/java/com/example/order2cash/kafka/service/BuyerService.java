@@ -1,4 +1,4 @@
-package com.example.order2cash.service;
+package com.example.order2cash.kafka.service;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -18,9 +18,9 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.stereotype.Service;
 
-import com.example.order2cash.config.KafkaTopics;
-import com.example.order2cash.util.XmlOutputWriter;
-import com.example.order2cash.util.XsltTransformer;
+import com.example.order2cash.kafka.config.KafkaTopics;
+import com.example.order2cash.kafka.util.XmlOutputWriter;
+import com.example.order2cash.kafka.util.XsltTransformer;
 
 import jakarta.annotation.PostConstruct;
 
@@ -57,7 +57,7 @@ public class BuyerService extends AbstractService {
         try (DirectoryStream<Path> stream = Files.newDirectoryStream(inputDir, "*.xml")) {
             for (Path file : stream) {
                 if (Files.isRegularFile(file)) {
-                    publishPurchaseOrder(file);
+                    onPurchaseOrderFileDetected(file);
                 }
             }
         } catch (IOException e) {
@@ -65,10 +65,11 @@ public class BuyerService extends AbstractService {
         }
     }
 
-    private void publishPurchaseOrder(Path filePath) {
-        String po;
+    // ── Step 1: Buyer reads PurchaseOrder → sends PurchaseOrder ─────
+    private void onPurchaseOrderFileDetected(Path filePath) {
+        String purchaseOrderXml;
         try {
-            po = Files.readString(filePath, StandardCharsets.UTF_8);
+            purchaseOrderXml = Files.readString(filePath, StandardCharsets.UTF_8);
         } catch (IOException e) {
             log.error("[BUYER] Cannot read {}: {}", filePath, e.getMessage());
             return;
@@ -76,8 +77,8 @@ public class BuyerService extends AbstractService {
         String workflowId = UUID.randomUUID().toString();
         for (int attempt = 1; attempt <= 5; attempt++) {
             try {
-                kafka.send(record(KafkaTopics.PURCHASE_ORDERS, workflowId, po)).get(10, TimeUnit.SECONDS);
-                writer.write(workflowId, "01-PurchaseOrder.xml", po);
+                kafka.send(record(KafkaTopics.PURCHASE_ORDERS, workflowId, purchaseOrderXml)).get(10, TimeUnit.SECONDS);
+                writer.write(workflowId, "01-PurchaseOrder.xml", purchaseOrderXml);
                 Files.deleteIfExists(filePath);
                 log.info("");
                 log.info("┌─ [BUYER] Step 1 ─ PurchaseOrder published ──────────────────");
@@ -85,7 +86,7 @@ public class BuyerService extends AbstractService {
                 log.info("│  WorkflowId : {}", workflowId);
                 log.info("│  Topic      : {}", KafkaTopics.PURCHASE_ORDERS);
                 log.info("└─────────────────────────────────────────────────────────────");
-                log.debug("\n{}", po);
+                log.debug("\n{}", purchaseOrderXml);
                 return;
             } catch (Exception e) {
                 log.warn("[BUYER] Publish attempt {}/5 failed: {}", attempt, e.getMessage());
@@ -102,15 +103,15 @@ public class BuyerService extends AbstractService {
         log.info("┌─ [BUYER] Step 7 ─ Invoice received → PaymentInstruction ───────");
         log.info("│  WorkflowId : {}", workflowId);
         log.debug("│  Invoice XML:\n{}", invoiceXml);
-        String paymentInstruction = xslt.transform(invoiceXml,
-            "/xslt/06-invoice-to-payment-instruction.xslt",
+        String paymentInstructionXml = xslt.transform(invoiceXml,
+            "/xsl/06-invoice-to-payment-instruction.xsl",
             Map.of("newId",       "PAYINST-" + shortUuid(),
                    "currentDate", LocalDate.now().toString()));
-        writer.write(workflowId, "07-PaymentInstruction.xml", paymentInstruction);
-        kafka.send(record(KafkaTopics.PAYMENT_INSTRUCTIONS, workflowId, paymentInstruction));
+        writer.write(workflowId, "07-PaymentInstruction.xml", paymentInstructionXml);
+        kafka.send(record(KafkaTopics.PAYMENT_INSTRUCTIONS, workflowId, paymentInstructionXml));
         log.info("│  Topic      : {}", KafkaTopics.PAYMENT_INSTRUCTIONS);
         log.info("└─────────────────────────────────────────────────────────────");
-        log.debug("\n{}", paymentInstruction);
+        log.debug("\n{}", paymentInstructionXml);
     }
 
     // ── Step 9: Buyer receives PaymentConfirmation ────────────────────────────

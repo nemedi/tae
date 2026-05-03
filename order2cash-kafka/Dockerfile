@@ -7,5 +7,5 @@ RUN mvn package -DskipTests -B
 
 FROM eclipse-temurin:21-jre-jammy
 WORKDIR /app
-COPY --from=build /app/target/order2cash-1.0.0.jar app.jar
+COPY --from=build /app/target/order2cash-kafka-1.0.0.jar app.jar
 ENTRYPOINT ["java", "-jar", "app.jar"]

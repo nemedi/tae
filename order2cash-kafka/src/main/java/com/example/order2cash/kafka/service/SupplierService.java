@@ -1,4 +1,4 @@
-package com.example.order2cash.service;
+package com.example.order2cash.kafka.service;
 
 import java.time.LocalDate;
 import java.util.Map;
@@ -9,9 +9,9 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.stereotype.Service;
 
-import com.example.order2cash.config.KafkaTopics;
-import com.example.order2cash.util.XmlOutputWriter;
-import com.example.order2cash.util.XsltTransformer;
+import com.example.order2cash.kafka.config.KafkaTopics;
+import com.example.order2cash.kafka.util.XmlOutputWriter;
+import com.example.order2cash.kafka.util.XsltTransformer;
 
 @Service
 @Profile("supplier")
@@ -28,15 +28,15 @@ public class SupplierService extends AbstractService {
         log.info("┌─ [SUPPLIER] Step 2 ─ PurchaseOrder received → InventoryRequest");
         log.info("│  WorkflowId : {}", workflowId);
         log.debug("│  PurchaseOrder XML:\n{}", purchaseOrderXml);
-        String inventoryRequest = xslt.transform(purchaseOrderXml,
-            "/xslt/01-purchase-order-to-inventory-request.xslt",
+        String inventoryRequestXml = xslt.transform(purchaseOrderXml,
+            "/xsl/01-purchase-order-to-inventory-request.xsl",
             Map.of("newId",       "INVREQ-" + shortUuid(),
                    "currentDate", LocalDate.now().toString()));
-        writer.write(workflowId, "02-InventoryRequest.xml", inventoryRequest);
-        kafka.send(record(KafkaTopics.INVENTORY_REQUESTS, workflowId, inventoryRequest));
+        writer.write(workflowId, "02-InventoryRequest.xml", inventoryRequestXml);
+        kafka.send(record(KafkaTopics.INVENTORY_REQUESTS, workflowId, inventoryRequestXml));
         log.info("│  Topic      : {}", KafkaTopics.INVENTORY_REQUESTS);
         log.info("└─────────────────────────────────────────────────────────────");
-        log.debug("\n{}", inventoryRequest);
+        log.debug("\n{}", inventoryRequestXml);
     }
 
     // ── Step 4: Supplier receives InventoryResponse → ShipmentRequest ─────────
@@ -46,16 +46,16 @@ public class SupplierService extends AbstractService {
         log.info("┌─ [SUPPLIER] Step 4 ─ InventoryResponse received → ShipmentRequest");
         log.info("│  WorkflowId : {}", workflowId);
         log.debug("│  InventoryResponse XML:\n{}", inventoryResponseXml);
-        String shipmentRequest = xslt.transform(inventoryResponseXml,
-            "/xslt/03-inventory-response-to-shipment-request.xslt",
+        String shipmentRequestXml = xslt.transform(inventoryResponseXml,
+            "/xsl/03-inventory-response-to-shipment-request.xsl",
             Map.of("newId",                 "SHIPREQ-" + shortUuid(),
                    "currentDate",           LocalDate.now().toString(),
                    "requestedDeliveryDate", LocalDate.now().plusDays(7).toString()));
-        writer.write(workflowId, "04-ShipmentRequest.xml", shipmentRequest);
-        kafka.send(record(KafkaTopics.SHIPMENT_REQUESTS, workflowId, shipmentRequest));
+        writer.write(workflowId, "04-ShipmentRequest.xml", shipmentRequestXml);
+        kafka.send(record(KafkaTopics.SHIPMENT_REQUESTS, workflowId, shipmentRequestXml));
         log.info("│  Topic      : {}", KafkaTopics.SHIPMENT_REQUESTS);
         log.info("└─────────────────────────────────────────────────────────────");
-        log.debug("\n{}", shipmentRequest);
+        log.debug("\n{}", shipmentRequestXml);
     }
 
     // ── Step 6: Supplier receives ShipmentNotification → Invoice ─────────────
@@ -66,16 +66,16 @@ public class SupplierService extends AbstractService {
         log.info("│  WorkflowId : {}", workflowId);
         log.debug("│  ShipmentNotification XML:\n{}", shipmentNotificationXml);
         LocalDate invoiceDate = LocalDate.now();
-        String invoice = xslt.transform(shipmentNotificationXml,
-            "/xslt/05-shipment-notification-to-invoice.xslt",
+        String invoiceXml = xslt.transform(shipmentNotificationXml,
+            "/xsl/05-shipment-notification-to-invoice.xsl",
             Map.of("newId",       "INV-" + shortUuid(),
                    "invoiceDate", invoiceDate.toString(),
                    "dueDate",     invoiceDate.plusDays(30).toString()));
-        writer.write(workflowId, "06-Invoice.xml", invoice);
-        kafka.send(record(KafkaTopics.INVOICES, workflowId, invoice));
+        writer.write(workflowId, "06-Invoice.xml", invoiceXml);
+        kafka.send(record(KafkaTopics.INVOICES, workflowId, invoiceXml));
         log.info("│  Topic      : {}", KafkaTopics.INVOICES);
         log.info("└─────────────────────────────────────────────────────────────");
-        log.debug("\n{}", invoice);
+        log.debug("\n{}", invoiceXml);
     }
 
     // ── Step 9: Supplier receives PaymentConfirmation ─────────────────────────

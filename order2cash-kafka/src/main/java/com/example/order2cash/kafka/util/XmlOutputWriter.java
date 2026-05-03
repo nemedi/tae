@@ -1,4 +1,4 @@
-package com.example.order2cash.util;
+package com.example.order2cash.kafka.util;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

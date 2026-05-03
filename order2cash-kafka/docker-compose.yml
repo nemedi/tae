@@ -1,21 +1,19 @@
-version: '3.8'
-
 x-app-common: &app-common
   build: .
   depends_on:
-    kafka1:
+    order2cash_kafka_kafka1:
       condition: service_healthy
-    kafka2:
+    order2cash_kafka_kafka2:
       condition: service_healthy
   volumes:
     - ./data:/data
   restart: on-failure:3
 
 services:
-  zookeeper:
+  order2cash_kafka_zookeeper:
     image: confluentinc/cp-zookeeper:7.6.0
     hostname: zookeeper
-    container_name: zookeeper
+    container_name: order2cash_kafka_zookeeper
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
@@ -25,12 +23,12 @@ services:
       timeout: 5s
       retries: 10
 
-  kafka1:
+  order2cash_kafka_kafka1:
     image: confluentinc/cp-kafka:7.6.0
     hostname: kafka1
-    container_name: kafka1
+    container_name: order2cash_kafka_kafka1
     depends_on:
-      zookeeper:
+      order2cash_kafka_zookeeper:
         condition: service_healthy
     ports:
       - "9092:9092"
@@ -51,12 +49,12 @@ services:
       timeout: 10s
       retries: 15
 
-  kafka2:
+  order2cash_kafka_kafka2:
     image: confluentinc/cp-kafka:7.6.0
     hostname: kafka2
-    container_name: kafka2
+    container_name: order2cash_kafka_kafka2
     depends_on:
-      zookeeper:
+      order2cash_kafka_zookeeper:
         condition: service_healthy
     ports:
       - "9093:9093"
@@ -77,45 +75,45 @@ services:
       timeout: 10s
       retries: 15
 
-  buyer:
+  order2cash_kafka_buyer:
     <<: *app-common
-    container_name: buyer
+    container_name: order2cash_kafka_buyer
     environment:
       SPRING_PROFILES_ACTIVE: buyer
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka1:29092
       LOGGING_LEVEL_COM_EXAMPLE_ORDER2CASH: INFO
       APP_DATA_PATH: /data
 
-  supplier:
+  order2cash_kafka_supplier:
     <<: *app-common
-    container_name: supplier
+    container_name: order2cash_kafka_supplier
     environment:
       SPRING_PROFILES_ACTIVE: supplier
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka1:29092
       LOGGING_LEVEL_COM_EXAMPLE_ORDER2CASH: INFO
       APP_DATA_PATH: /data
 
-  inventory:
+  order2cash_kafka_inventory:
     <<: *app-common
-    container_name: inventory
+    container_name: order2cash_kafka_inventory
     environment:
       SPRING_PROFILES_ACTIVE: inventory
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka2:29093
       LOGGING_LEVEL_COM_EXAMPLE_ORDER2CASH: INFO
       APP_DATA_PATH: /data
 
-  logistics:
+  order2cash_kafka_logistics:
     <<: *app-common
-    container_name: logistics
+    container_name: order2cash_kafka_logistics
     environment:
       SPRING_PROFILES_ACTIVE: logistics
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka2:29093
       LOGGING_LEVEL_COM_EXAMPLE_ORDER2CASH: INFO
       APP_DATA_PATH: /data
 
-  bank:
+  order2cash_kafka_bank:
     <<: *app-common
-    container_name: bank
+    container_name: order2cash_kafka_bank
     environment:
       SPRING_PROFILES_ACTIVE: bank
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka2:29093
