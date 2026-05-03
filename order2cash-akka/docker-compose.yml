@@ -1,0 +1,90 @@
+services:
+
+  order2cash_akka_buyer:
+    build: .
+    image: order2cash-akka:latest
+    container_name: order2cash_akka_buyer
+    hostname: buyer
+    environment:
+      AGENT_TYPE: buyer
+      AKKA_HOSTNAME: buyer
+      DATA_PATH: data
+    ports:
+      - "3551:2551"
+    volumes:
+      - ./data:/app/data
+    networks:
+      - order2cash-net
+    restart: on-failure
+
+  order2cash_akka_supplier:
+    build: .
+    image: order2cash-akka:latest
+    container_name: order2cash_akka_supplier
+    hostname: supplier
+    environment:
+      AGENT_TYPE: supplier
+      AKKA_HOSTNAME: supplier
+      DATA_PATH: data
+    ports:
+      - "4551:2551"
+    volumes:
+      - ./data:/app/data
+    networks:
+      - order2cash-net
+    restart: on-failure
+
+  order2cash_akka_inventory:
+    build: .
+    image: order2cash-akka:latest
+    container_name: order2cash_akka_inventory
+    hostname: inventory
+    environment:
+      AGENT_TYPE: inventory
+      AKKA_HOSTNAME: inventory
+      DATA_PATH: data
+    ports:
+      - "5551:2551"
+    volumes:
+      - ./data:/app/data
+    networks:
+      - order2cash-net
+    restart: on-failure
+
+  order2cash_akka_logistics:
+    build: .
+    image: order2cash-akka:latest
+    container_name: order2cash_akka_logistics
+    hostname: logistics
+    environment:
+      AGENT_TYPE: logistics
+      AKKA_HOSTNAME: logistics
+      DATA_PATH: data
+    ports:
+      - "6551:2551"
+    volumes:
+      - ./data:/app/data
+    networks:
+      - order2cash-net
+    restart: on-failure
+
+  order2cash_akka_bank:
+    build: .
+    image: order2cash-akka:latest
+    container_name: order2cash_akka_bank
+    hostname: bank
+    environment:
+      AGENT_TYPE: bank
+      AKKA_HOSTNAME: bank
+      DATA_PATH: data
+    ports:
+      - "7551:2551"
+    volumes:
+      - ./data:/app/data
+    networks:
+      - order2cash-net
+    restart: on-failure
+
+networks:
+  order2cash-net:
+    driver: bridge

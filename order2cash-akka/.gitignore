@@ -1,0 +1,91 @@
+# =========================
+# Build directories
+# =========================
+/target/
+/build/
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# =========================
+# Logs
+# =========================
+*.log
+logs/
+*.out
+
+# =========================
+# Spring Boot
+# =========================
+*.jar
+*.war
+*.ear
+*.class
+
+# =========================
+# Maven
+# =========================
+.mvn/wrapper/maven-wrapper.jar
+
+# =========================
+# Gradle
+# =========================
+.gradle/
+!gradle/wrapper/gradle-wrapper.jar
+
+# =========================
+# IDEs and Editors
+# =========================
+
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+
+# Eclipse
+.project
+.classpath
+.settings/
+.springBeans
+
+# VS Code
+.vscode/
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# =========================
+# OS Files
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# Environment & Config
+# =========================
+.env
+.env.*
+application-*.yml
+application-*.properties
+
+# Keep default config
+!src/main/resources/application.yml
+!src/main/resources/application.properties
+
+# =========================
+# Test & Coverage
+# =========================
+/coverage/
+*.lcov
+
+# =========================
+# Misc
+# =========================
+*.swp
+*.swo
+*~
