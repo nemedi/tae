@@ -6,7 +6,7 @@ x-app-common: &app-common
     order2cash_kafka_kafka2:
       condition: service_healthy
   volumes:
-    - ./data:/data
+    - ./data:/order2cash/data
   restart: on-failure:3
 
 services:
@@ -82,7 +82,7 @@ services:
       SPRING_PROFILES_ACTIVE: buyer
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka1:29092
       LOGGING_LEVEL_COM_EXAMPLE_ORDER2CASH: INFO
-      APP_DATA_PATH: /data
+      DATA_PATH: /order2cash/data
 
   order2cash_kafka_supplier:
     <<: *app-common
@@ -91,7 +91,7 @@ services:
       SPRING_PROFILES_ACTIVE: supplier
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka1:29092
       LOGGING_LEVEL_COM_EXAMPLE_ORDER2CASH: INFO
-      APP_DATA_PATH: /data
+      DATA_PATH: /order2cash/data
 
   order2cash_kafka_inventory:
     <<: *app-common
@@ -100,7 +100,7 @@ services:
       SPRING_PROFILES_ACTIVE: inventory
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka2:29093
       LOGGING_LEVEL_COM_EXAMPLE_ORDER2CASH: INFO
-      APP_DATA_PATH: /data
+      DATA_PATH: /order2cash/data
 
   order2cash_kafka_logistics:
     <<: *app-common
@@ -109,7 +109,7 @@ services:
       SPRING_PROFILES_ACTIVE: logistics
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka2:29093
       LOGGING_LEVEL_COM_EXAMPLE_ORDER2CASH: INFO
-      APP_DATA_PATH: /data
+      DATA_PATH: /order2cash/data
 
   order2cash_kafka_bank:
     <<: *app-common
@@ -118,4 +118,4 @@ services:
       SPRING_PROFILES_ACTIVE: bank
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka2:29093
       LOGGING_LEVEL_COM_EXAMPLE_ORDER2CASH: INFO
-      APP_DATA_PATH: /data
+      DATA_PATH: /order2cash/data

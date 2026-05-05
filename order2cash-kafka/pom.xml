@@ -11,7 +11,7 @@
         <relativePath/>
     </parent>
 
-    <groupId>com.example</groupId>
+    <groupId>com.example.order2cash</groupId>
     <artifactId>order2cash-kafka</artifactId>
     <version>1.0.0</version>
     <name>Order to Cash Demo</name>

@@ -15,7 +15,7 @@ public class XmlOutputWriter {
 
     private static final Logger log = LoggerFactory.getLogger(XmlOutputWriter.class);
 
-    @Value("${app.data-path}")
+    @Value("${application.data-path}")
     private String dataPath;
 
     public void write(String workflowId, String filename, String xml) {

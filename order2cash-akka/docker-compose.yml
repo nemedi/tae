@@ -12,7 +12,7 @@ services:
     ports:
       - "3551:2551"
     volumes:
-      - ./data:/app/data
+      - ./data:/order2cash/data
     networks:
       - order2cash-net
     restart: on-failure
@@ -29,7 +29,7 @@ services:
     ports:
       - "4551:2551"
     volumes:
-      - ./data:/app/data
+      - ./data:/order2cash/data
     networks:
       - order2cash-net
     restart: on-failure
@@ -46,7 +46,7 @@ services:
     ports:
       - "5551:2551"
     volumes:
-      - ./data:/app/data
+      - ./data:/order2cash/data
     networks:
       - order2cash-net
     restart: on-failure
@@ -63,7 +63,7 @@ services:
     ports:
       - "6551:2551"
     volumes:
-      - ./data:/app/data
+      - ./data:/order2cash/data
     networks:
       - order2cash-net
     restart: on-failure
@@ -80,7 +80,7 @@ services:
     ports:
       - "7551:2551"
     volumes:
-      - ./data:/app/data
+      - ./data:/order2cash/data
     networks:
       - order2cash-net
     restart: on-failure

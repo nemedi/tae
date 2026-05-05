@@ -1,0 +1,110 @@
+services:
+
+  order2cash_ws_buyer:
+    build: .
+    image: order2cash-ws:latest
+    container_name: order2cash_ws_buyer
+    hostname: buyer
+    environment:
+      SERVICE_TYPE: buyer
+      DATA_PATH: /order2cash/data
+      BUYER_ENDPOINT: http://buyer:8080/buyer
+      SUPPLIER_ENDPOINT: http://supplier:8080/supplier
+      INVENTORY_ENDPOINT: http://inventory:8080/inventory
+      LOGISTICS_ENDPOINT: http://logistics:8080/logistics
+      BANK_ENDPOINT: http://bank:8080/bank
+    ports:
+      - "8180:8080"
+    volumes:
+      - ./data:/order2cash/data
+    networks:
+      - order2cash-net
+    restart: on-failure
+
+  order2cash_ws_supplier:
+    build: .
+    image: order2cash-ws:latest
+    container_name: order2cash_ws_supplier
+    hostname: supplier
+    environment:
+      SERVICE_TYPE: supplier
+      DATA_PATH: /order2cash/data
+      BUYER_ENDPOINT: http://buyer:8080/buyer
+      SUPPLIER_ENDPOINT: http://supplier:8080/supplier
+      INVENTORY_ENDPOINT: http://inventory:8080/inventory
+      LOGISTICS_ENDPOINT: http://logistics:8080/logistics
+      BANK_ENDPOINT: http://bank:8080/bank
+    ports:
+      - "8280:8080"
+    volumes:
+      - ./data:/order2cash/data
+    networks:
+      - order2cash-net
+    restart: on-failure
+
+  order2cash_ws_inventory:
+    build: .
+    image: order2cash-ws:latest
+    container_name: order2cash_ws_inventory
+    hostname: inventory
+    environment:
+      SERVICE_TYPE: inventory
+      DATA_PATH: /order2cash/data
+      BUYER_ENDPOINT: http://buyer:8080/buyer
+      SUPPLIER_ENDPOINT: http://supplier:8080/supplier
+      INVENTORY_ENDPOINT: http://inventory:8080/inventory
+      LOGISTICS_ENDPOINT: http://logistics:8080/logistics
+      BANK_ENDPOINT: http://bank:8080/bank
+    ports:
+      - "8380:8080"
+    volumes:
+      - ./data:/order2cash/data
+    networks:
+      - order2cash-net
+    restart: on-failure
+
+  order2cash_ws_logistics:
+    build: .
+    image: order2cash-ws:latest
+    container_name: order2cash_ws_logistics
+    hostname: logistics
+    environment:
+      SERVICE_TYPE: logistics
+      DATA_PATH: /order2cash/data
+      BUYER_ENDPOINT: http://buyer:8080/buyer
+      SUPPLIER_ENDPOINT: http://supplier:8080/supplier
+      INVENTORY_ENDPOINT: http://inventory:8080/inventory
+      LOGISTICS_ENDPOINT: http://logistics:8080/logistics
+      BANK_ENDPOINT: http://bank:8080/bank
+    ports:
+      - "8480:8080"
+    volumes:
+      - ./data:/order2cash/data
+    networks:
+      - order2cash-net
+    restart: on-failure
+
+  order2cash_ws_bank:
+    build: .
+    image: order2cash-ws:latest
+    container_name: order2cash_ws_bank
+    hostname: bank
+    environment:
+      SERVICE_TYPE: bank
+      DATA_PATH: /order2cash/data
+      BUYER_ENDPOINT: http://buyer:8080/buyer
+      SUPPLIER_ENDPOINT: http://supplier:8080/supplier
+      INVENTORY_ENDPOINT: http://inventory:8080/inventory
+      LOGISTICS_ENDPOINT: http://logistics:8080/logistics
+      BANK_ENDPOINT: http://bank:8080/bank
+    ports:
+      - "8580:8080"
+    volumes:
+      - ./data:/order2cash/data
+    networks:
+      - order2cash-net
+    restart: on-failure
+
+networks:
+  order2cash-net:
+    driver: bridge

@@ -4,8 +4,8 @@ spring:
   kafka:
     bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
 
-app:
-  data-path: ${APP_DATA_PATH:/data}
+application:
+  data-path: ${DATA_PATH:/data}
 
 logging:
   level:

@@ -1,9 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(mkdir -p \"C:/Work/Projects/ASE/TAE/order2cash-akka/src/main/java/com/order2cash/messages\" \"C:/Work/Projects/ASE/TAE/order2cash-akka/src/main/java/com/order2cash/remote\")",
-      "Bash(rm \"C:/Work/Projects/ASE/TAE/order2cash-akka/src/main/java/com/order2cash/kafka/KafkaTopics.java\" \"C:/Work/Projects/ASE/TAE/order2cash-akka/src/main/java/com/order2cash/kafka/KafkaConfig.java\")",
-      "Bash(rmdir \"C:/Work/Projects/ASE/TAE/order2cash-akka/src/main/java/com/order2cash/kafka\")"
-    ]
-  }
-}
