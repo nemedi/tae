@@ -5,7 +5,7 @@ spring:
     bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
 
 application:
-  data-path: ${DATA_PATH:/data}
+  data-path: ${DATA_PATH:data}
 
 logging:
   level:

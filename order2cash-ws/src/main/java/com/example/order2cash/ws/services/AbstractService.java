@@ -15,17 +15,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import jakarta.activation.DataHandler;
-import jakarta.annotation.Resource;
 import jakarta.mail.util.ByteArrayDataSource;
 import jakarta.xml.ws.Service;
-import jakarta.xml.ws.WebServiceContext;
 
 public abstract class AbstractService {
 	
 	protected static final Logger log = LoggerFactory.getLogger(AbstractService.class);
-
-	@Resource
-	private WebServiceContext context;
 
 	private Map<String, String> endpoints;
 	

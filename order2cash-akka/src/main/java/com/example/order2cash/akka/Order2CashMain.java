@@ -14,7 +14,7 @@ public class Order2CashMain {
     private static final Logger log = LoggerFactory.getLogger(Order2CashMain.class);
 
     public static void main(String[] args) throws InterruptedException {
-        String agentType = System.getenv().getOrDefault("AGENT_TYPE", "buyer").toLowerCase();
+        String agentType = System.getenv().getOrDefault("AGENT_TYPE", "unknown").toLowerCase();
         log.info("Starting Order2Cash agent: {}", agentType);
 
         ActorSystem system = ActorSystem.create("order2cash-" + agentType);

@@ -28,7 +28,7 @@ import jakarta.annotation.PostConstruct;
 @Profile("buyer")
 public class BuyerService extends AbstractService {
 
-    @Value("${app.data-path}")
+    @Value("${application.data-path}")
     private String dataPath;
 
     public BuyerService(KafkaTemplate<String, String> kafka, XsltTransformer xslt, XmlOutputWriter writer) {

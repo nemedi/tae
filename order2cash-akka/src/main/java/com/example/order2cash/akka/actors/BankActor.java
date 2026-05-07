@@ -52,18 +52,18 @@ public class BankActor extends AbstractActor {
         log.info("│  WorkflowId : {}", workflowId);
         log.debug("│  PaymentInstruction XML:\n{}", paymentInstructionXml);
         String transactionId = "TXN-" + shortUuid();
-        String confirmationXml = transform(paymentInstructionXml,
+        String paymentConfirmationXml = transform(paymentInstructionXml,
             "/xsl/07-payment-instruction-to-payment-confirmation.xsl",
             Map.of("newId",            "PAYCONF-" + shortUuid(),
                    "transactionId",    transactionId,
                    "confirmationDate", LocalDate.now().toString()));
-        write(workflowId, "08-PaymentConfirmation.xml", confirmationXml);
-        PaymentConfirmation paymentConfirmation = new PaymentConfirmation(workflowId, confirmationXml);
+        write(workflowId, "08-PaymentConfirmation.xml", paymentConfirmationXml);
+        PaymentConfirmation paymentConfirmation = new PaymentConfirmation(workflowId, paymentConfirmationXml);
 		supplierRef.tell(paymentConfirmation, getSelf());
 		buyerRef.tell(paymentConfirmation, getSelf());
         log.info("│  TxnId      : {}", transactionId);
         log.info("│  Status     : COMPLETED");
         log.info("└─────────────────────────────────────────────────────────────");
-        log.debug("\n{}", confirmationXml);
+        log.debug("\n{}", paymentConfirmationXml);
     }
 }
